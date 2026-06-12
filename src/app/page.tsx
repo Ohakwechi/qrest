@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { MOCK_PRODUCTS } from '@/lib/data';
 import { Product, CartItem, StrainType, CategoryType } from '@/types';
+import Image from 'next/image';
 
 export default function SimpleShop() {
   // --- STATE ---
@@ -69,8 +70,8 @@ export default function SimpleShop() {
     return (
       <div className="fixed inset-0 bg-[#0B1511] flex flex-col items-center justify-center text-white px-4 z-50">
         <div className="max-w-md w-full bg-[#1C3A27] p-8 rounded-2xl text-center border border-emerald-800 shadow-2xl">
-          <h1 className="text-3xl font-serif font-bold tracking-wide text-amber-400 mb-2">Boutique Menu</h1>
-          <p className="text-gray-300 text-sm mb-6">Verify location compliance protocols</p>
+          <h1 className="text-3xl font-serif font-bold tracking-wide text-amber-400 mb-2">Smoke Accessories</h1>
+          <p className="text-gray-300 text-sm mb-6">Age Verification</p>
           <p className="text-xl font-medium mb-8">Are you 21 years of age or older?</p>
           <div className="flex gap-4">
             <button 
@@ -110,11 +111,24 @@ export default function SimpleShop() {
 
       {/* Main Framework Content */}
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-10">
+{/* Banner */}
+        <div className="relative bg-gradient-to-r  h-[20rem] from-emerald-500 to-teal-500 text-white p-6 rounded-2xl shadow-lg mb-10">
+          <h1 className="text-xl md:text-3xl font-serif font-bold tracking-wide mb-2">Smoke Accessories</h1>
+          <p className="text-sm w-[10rem]">Discover our premium selection of smoking accessories</p>
+          <Image
+            src="/images/wizkid2.jpeg"
+            alt="Smoke Accessories"
+            width={200}
+            height={100}
+            className="absolute right-6 top-6 rounded-lg shadow-md"
+          />
+        </div>
+
         {/* Quick Categorization Controls */}
         <div className="flex flex-wrap gap-8 items-center justify-between mb-10 pb-6 border-b border-gray-200">
           {/* Category Filter */}
           <div className="flex gap-2 bg-gray-100 p-1.5 rounded-xl">
-            {(['All', 'Flower', 'Concentrates', 'Edibles'] as const).map((cat) => (
+            {(['All', 'Flower', 'Cones', 'Edibles'] as const).map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
@@ -129,15 +143,15 @@ export default function SimpleShop() {
 
           {/* Strain Filter Tag Badging */}
           <div className="flex gap-2">
-            {(['All', 'Sativa', 'Indica', 'Hybrid'] as const).map((strain) => (
+            {(['All', 'flower', 'Cones', 'Edibles'] as const).map((strain) => (
               <button
                 key={strain}
                 onClick={() => setSelectedStrain(strain)}
                 className={`py-1.5 px-4 rounded-full text-xs font-bold uppercase tracking-wider transition border ${
                   selectedStrain === strain
-                    ? strain === 'Sativa' ? 'bg-amber-500 border-amber-500 text-white' :
-                      strain === 'Indica' ? 'bg-purple-600 border-purple-600 text-white' :
-                      strain === 'Hybrid' ? 'bg-emerald-600 border-emerald-600 text-white' : 'bg-[#0B1511] text-white border-black'
+                    ? strain === 'flower' ? 'bg-amber-500 border-amber-500 text-white' :
+                      strain === 'Cones' ? 'bg-purple-600 border-purple-600 text-white' :
+                      strain === 'Edibles' ? 'bg-emerald-600 border-emerald-600 text-white' : 'bg-[#0B1511] text-white border-black'
                     : 'bg-white text-gray-600 border-gray-200 hover:border-gray-400'
                 }`}
               >
@@ -151,10 +165,11 @@ export default function SimpleShop() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredProducts.map((product) => {
             // Setup accent badges for Leafly-style strain visualization
-            const colorMap = {
-              Sativa: 'text-amber-600 bg-amber-50 border-amber-200',
-              Indica: 'text-purple-600 bg-purple-50 border-purple-200',
-              Hybrid: 'text-emerald-600 bg-emerald-50 border-emerald-200'
+            const colorMap: Record<StrainType, string> = {
+              flower: 'text-amber-600 bg-amber-50 border-amber-200',
+              Cones: 'text-purple-600 bg-purple-50 border-purple-200',
+              Edibles: 'text-emerald-600 bg-emerald-50 border-emerald-200',
+              Accessories: 'text-gray-600 bg-gray-50 border-gray-200'
             };
 
             return (

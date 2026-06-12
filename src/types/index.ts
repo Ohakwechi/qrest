@@ -1,6 +1,6 @@
 // src/types/index.ts
-export type StrainType = 'Sativa' | 'Indica' | 'Hybrid';
-export type CategoryType = 'Flower' | 'Concentrates' | 'Edibles';
+export type StrainType = 'flower' | 'Cones' | 'Edibles' | 'Accessories' ;
+export type CategoryType = 'Flower' | 'Cones' | 'Edibles' | 'Accessories';
 
 export interface Product {
   id: string;
